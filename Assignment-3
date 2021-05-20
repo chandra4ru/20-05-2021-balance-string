@@ -1,0 +1,34 @@
+import java.util.*;
+
+class Solution {
+public static void main(String args[])
+{
+Scanner s=new Scanner(System.in);
+int n1=s.nextInt();
+int arr1[]=new int[n1];
+int n2=s.nextInt();
+int arr2[]=new int[n2];
+for (int i=0;i<n1;i++)
+arr1[i]=s.nextInt();
+for (int i=0;i<n2;i++)
+arr2[i]=s.nextInt();
+
+nextGreaterElement(arr1, arr2);
+}
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> indexs = new HashMap<>();
+        int[] result = new int[nums1.length];
+        for (int i = 0; i < nums2.length; i++) indexs.put(nums2[i], i);
+        for (int i = 0; i < nums1.length; i++) {
+            int index = -1;
+            for (int j = indexs.get(nums1[i]) + 1; j < nums2.length; j++) {
+                if (nums2[j] > nums1[i]) {
+                    index = j;
+                    break;
+                }
+            }
+            result[i] = index == -1 ? index : nums2[index];
+        }
+        return result;
+    }
+}
